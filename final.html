@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Final Decision</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #33ff33;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 40px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #terminal-text {
+      font-size: 20px;
+      text-align: left;
+      white-space: pre-line;
+      margin: 50px auto;
+      width: 80%;
+      max-width: 800px;
+      display: none;
+    }
+
+    #flashing-warning {
+      font-size: 36px;
+      color: #ff0000;
+      font-weight: bold;
+      animation: flash 0.8s infinite;
+      margin: 20px 0;
+      display: none;
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    #countdown {
+      font-size: 48px;
+      color: #ff3333;
+      display: none;
+      margin-top: 20px;
+    }
+
+    #decision-text {
+      display: none;
+      margin-top: 40px;
+      font-size: 18px;
+      color: #ff3333;
+    }
+
+    #choices {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #choices button {
+      padding: 15px 30px;
+      margin: 0 15px;
+      background-color: #111;
+      color: #33ff33;
+      border: 1px solid #33ff33;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #choices button:hover {
+      background-color: #222;
+    }
+
+    #start-btn {
+      font-size: 24px;
+      padding: 15px 40px;
+      margin-top: 100px;
+      background-color: #111;
+      border: 2px solid #33ff33;
+      color: #33ff33;
+      cursor: pointer;
+    }
+
+    #start-btn:hover {
+      background-color: #222;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="alarmAudio" src="../Audio/Alarm.mp3" preload="auto"></audio>
+
+  <button id="start-btn" onclick="startFinalRound()">Start Final Round</button>
+
+  <div id="terminal-text"></div>
+  <div id="flashing-warning">!! MISSILE WARNING !!</div>
+  <div id="countdown">15.00</div>
+
+  <div id="decision-text">You have detected a massive nuclear attack from the Soviet Union. Confidence is high. This is not a drill.</div>
+  <div id="choices">
+    <button onclick="handleFinalChoice('Launch')">LAUNCH</button>
+    <button onclick="handleFinalChoice('Stand Down')">DO NOT LAUNCH</button>
+  </div>
+
+  <script>
+    const message = `Soviet Launch Detection.\nMissile Warning.\nConfidence is high.\nThis is not a test, repeat...\nTHIS IS NOT A TEST.`;
+    const terminal = document.getElementById("terminal-text");
+    const warning = document.getElementById("flashing-warning");
+    const countdown = document.getElementById("countdown");
+    const decisionText = document.getElementById("decision-text");
+    const choicesDiv = document.getElementById("choices");
+    const startBtn = document.getElementById("start-btn");
+    const alarm = document.getElementById("alarmAudio");
+
+    let index = 0;
+    let timeLeft = 15.00;
+    let interval;
+
+    function startFinalRound() {
+      startBtn.style.display = "none";
+      terminal.style.display = "block";
+      alarm.play().catch(err => console.warn("Audio play failed:", err));
+      typeMessage();
+    }
+
+    function typeMessage() {
+      if (index < message.length) {
+        terminal.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(typeMessage, 50);
+      } else {
+        showLaunchPrompt();
+      }
+    }
+
+    function showLaunchPrompt() {
+      warning.style.display = "block";
+      countdown.style.display = "block";
+      decisionText.style.display = "block";
+      choicesDiv.style.display = "block";
+      startCountdown();
+    }
+
+    function startCountdown() {
+      interval = setInterval(() => {
+        timeLeft -= 0.01;
+        timeLeft = Math.max(0, timeLeft);
+        countdown.textContent = timeLeft.toFixed(2);
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          fail("You hesitated too long. Soviet warheads made contact.");
+        }
+      }, 10);
+    }
+
+    function handleFinalChoice(choice) {
+      clearInterval(interval);
+      if (choice === 'Launch') {
+        // If 'Launch' is chosen, show failure message for everyone being dead
+        document.body.innerHTML = `
+          <h2 style="color: red;">MISSION FAILED</h2>
+          <p><strong>✖️ You launched the missiles. Global devastation occurred.</strong></p>
+          <p>Everyone is dead. Humanity is no more.</p>
+          <br><br>
+          <button onclick="location.href='index.html'">Restart Game</button>
+        `;
+      } else {
+        document.body.innerHTML = `
+          <h2 style="color: #33ff33;">YOU STOOD DOWN</h2>
+          <p><strong>✔️ You held your fire. The radar return was a false alarm.</strong></p>
+          <p>Humanity survives. For now.</p>
+          <br><br>
+          <button onclick="location.href='index.html'">Restart Game</button>
+        `;
+      }
+    }
+
+    function fail(message) {
+      document.body.innerHTML = `
+        <h2 style="color: red;">MISSION FAILED</h2>
+        <p><strong>✖️ ${message}</strong></p>
+        <br><br>
+        <button onclick="location.href='index.html'">Restart Game</button>
+      `;
+    }
+  </script>
+
+</body>
+</html>
