@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nuclear Fallout - Intro</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #111;
+      color: #0f0;
+      text-align: center;
+      padding: 30px;
+    }
+
+    #intro-panel {
+      border: 2px solid #0f0;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: #222;
+    }
+
+    #story-text {
+      font-size: 18px;
+      min-height: 200px;
+      white-space: pre-wrap;
+      text-align: left;
+      padding: 10px;
+    }
+
+    #start-button {
+      display: none;
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛰️ Global Defense Network</h1>
+  <div id="intro-panel">
+    <div id="story-text">Initializing briefing...</div>
+    <button id="start-button" onclick="location.href='pinball.html'">Start Mission</button>
+  </div>
+
+  <script>
+    const storyTextEl = document.getElementById("story-text");
+    const startButton = document.getElementById("start-button");
+
+    const storyLines = [
+      "Year: 2083.",
+      "World powers are locked in a relentless global conflict.",
+      "Satellite intel confirms rising missile activity across hostile territories.",
+      "All major cities are on high alert.",
+      "You are the commander of the Strategic Defense Network.",
+      "Your job is simple, yet terrifying:",
+      "Identify threats. Decide if they are real.",
+      "Select targets. Launch retaliatory strikes.",
+      "Or stand down and risk annihilation.",
+      "The fate of your nation rests on your judgment...",
+      "No pressure.",
+      "",
+      "Prepare for mission upload..."
+    ];
+
+    let i = 0;
+
+    function typeNextLine() {
+      if (i < storyLines.length) {
+        storyTextEl.textContent += "\n" + storyLines[i];
+        i++;
+        setTimeout(typeNextLine, 1200); // ~1.2 seconds per line
+      } else {
+        startButton.style.display = "inline-block";
+      }
+    }
+
+    // Start typing after short delay
+    setTimeout(typeNextLine, 1000);
+  </script>
+</body>
+</html>

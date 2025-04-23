@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nuclear Bunker Protocol</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #33ff33;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+      position: relative;
+    }
+    h1 {
+      color: #ff3333;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #111;
+      color: #33ff33;
+      border: 1px solid #33ff33;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: #222;
+    }
+    #timer {
+      font-size: 18px;
+      color: #ff3333;
+      margin-top: 10px;
+    }
+    #level-counter {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 18px;
+      color: #33ff33;
+    }
+    #restart-btn {
+      display: none;
+      padding: 15px 30px;
+      background-color: #ff3333;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    #restart-btn:hover {
+      background-color: #cc2929;
+    }
+
+    /* Hidden black button on the bottom right */
+    .hidden-button {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      background-color: black;
+      border: none;
+      cursor: pointer;
+      opacity: 0; /* Fully hidden */
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>NUCLEAR BUNKER: FINAL PROTOCOL</h1>
+  <div id="level-counter">Level 1 / 30</div>
+  <div id="story">Initializing bunker interface...</div>
+  <div id="choices"></div>
+  <div id="timer"></div>
+  <button id="restart-btn" onclick="restartGame()">Restart Game</button>
+
+  <!-- Hidden black button to go to final.html -->
+  <a href="final.html" class="hidden-button"></a>
+
+  <script>
+    const finalQuestion = {
+      text: "This is it. The entire world is at the brink. Every nuclear warhead is primed. You have the final authority to unleash global fire—or to step back and hope humanity finds a way. What do you do?",
+      choices: ["Launch Warheads", "Stand Down"],
+      correct: "Stand Down",
+      explanation: "Against pressure, fear, and wrath—you chose restraint. History will remember this moment. You gave Earth a second chance."
+    };
+
+    const questions = [
+      { text: "EMP strike hit your satellite network. Do you:", choices: ["Alert public", "Wait for backup"], correct: "Wait for backup", explanation: "Waiting is the safest choice, even though it’s risky." },
+      { text: "A nuke near a power plant is unconfirmed. Do you:", choices: ["Evacuate", "Wait for intel"], correct: "Evacuate", explanation: "Evacuating fast minimizes casualties." },
+      { text: "Missiles inbound. Do you:", choices: ["Launch countermeasures", "Wait for confirmation"], correct: "Launch countermeasures", explanation: "Acting fast can prevent worse damage." },
+      { text: "Radar detects an unknown missile. Do you:", choices: ["Launch strike", "Wait for confirmation"], correct: "Wait for confirmation", explanation: "Waiting is risky but can avoid unnecessary escalation." },
+      { text: "Nuclear submarine gone missing. Do you:", choices: ["Deploy warships", "Wait for intel"], correct: "Deploy warships", explanation: "Preemptive action could stop a disaster." },
+      { text: "Cyberattacks just hit your military. Do you:", choices: ["Cut communications", "Continue operations"], correct: "Cut communications", explanation: "Severing communications is a precaution against further sabotage." },
+      { text: "Enemy strikes with tactical nuke. Do you:", choices: ["Retaliate", "Negotiate"], correct: "Retaliate", explanation: "Retaliating asserts your defense, but it's dangerous." },
+      { text: "News reports claim enemy nukes inbound. Do you:", choices: ["Launch counterattack", "Negotiate"], correct: "Launch counterattack", explanation: "Retaliation shows strength, but increases risk." },
+      { text: "Missile defense systems failed. Do you:", choices: ["Launch all missiles", "Wait for backup"], correct: "Launch all missiles", explanation: "Taking action immediately could be your only chance." },
+      { text: "Rogue faction controls a nuclear silo. Do you:", choices: ["Airstrike", "Wait for intel"], correct: "Airstrike", explanation: "Taking out the silo is the only safe option." },
+      { text: "Traitor passed missile codes. Do you:", choices: ["Lockdown operations", "Continue normal operations"], correct: "Lockdown operations", explanation: "Stopping the traitor is critical before more damage is done." },
+      { text: "Enemy fleet with nukes inbound. Do you:", choices: ["Launch missiles", "Negotiate"], correct: "Launch missiles", explanation: "You must act quickly to stop the fleet." },
+      { text: "Missile defense compromised. Do you:", choices: ["Launch first strike", "Wait for confirmation"], correct: "Launch first strike", explanation: "Acting first could prevent a devastating counterattack." },
+      // Add more questions here as needed (total of 30)
+    ];
+
+    let usedQuestions = [];
+    let currentTimer = 15;
+    let timerId;
+    let level = 1;
+    const totalLevels = 30;
+
+    function startGame() {
+      usedQuestions = [];
+      level = 1;
+      nextQuestion();
+      document.getElementById("restart-btn").style.display = "none"; // Hide the restart button
+    }
+
+    function updateLevelCounter() {
+      document.getElementById("level-counter").innerText = `Level ${level} / 30`;
+    }
+
+    function nextQuestion() {
+      updateLevelCounter();
+
+      if (level === totalLevels) {
+        window.location.href = "final.html"; // Redirect to final round after level 30
+        return;
+      }
+
+      let q = questions[level - 1];
+      document.getElementById("story").innerHTML = `<strong>Level ${level}:</strong><br>${q.text}`;
+      document.getElementById("choices").innerHTML = '';
+
+      q.choices.forEach(choice => {
+        let btn = document.createElement("button");
+        btn.innerText = choice;
+        btn.onclick = () => evaluateChoice(choice, q.correct, q.explanation);
+        document.getElementById("choices").appendChild(btn);
+      });
+
+      startTimer();
+    }
+
+    function evaluateChoice(selected, correct, explanation) {
+      clearInterval(timerId);
+      if (selected === correct) {
+        document.getElementById("story").innerHTML += `<br><br><em>✔️ ${explanation}</em>`;
+        document.getElementById("choices").innerHTML = '';
+        document.getElementById("timer").innerText = '';
+        level++;
+        setTimeout(nextQuestion, 3000);
+      } else {
+        gameOver(`Wrong choice.<br><br><em>✖️ ${explanation}</em><br><br><strong>Everyone is dead. You failed to act in time. The world is destroyed.</strong>`);
+      }
+    }
+
+    function startTimer() {
+      currentTimer = Math.max(5, 15 - Math.floor(level / 3)); // Gradual increase in difficulty
+      document.getElementById("timer").innerText = `Time remaining: ${currentTimer}s`;
+
+      timerId = setInterval(() => {
+        currentTimer--;
+        document.getElementById("timer").innerText = `Time remaining: ${currentTimer}s`;
+        if (currentTimer <= 0) {
+          clearInterval(timerId);
+          gameOver("You froze. That hesitation cost everything. The missiles are already in the air.");
+        }
+      }, 1000);
+    }
+
+    function gameOver(message) {
+      document.getElementById("story").innerHTML = `<strong>GAME OVER</strong><br><br>${message}`;
+      document.getElementById("choices").innerHTML = '';
+      document.getElementById("timer").innerText = '';
+      document.getElementById("restart-btn").style.display = "inline-block"; // Show restart button
+    }
+
+    function restartGame() {
+      startGame();
+    }
+
+    startGame();
+  </script>
+</body>
+</html>

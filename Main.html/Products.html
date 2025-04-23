@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Animated Films</title>
+
+  <!-- Embedded CSS -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .site-header {
+      background-color: #20232a;
+      color: white;
+      padding: 20px 0;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      margin-left: 20px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .content-block {
+      padding: 40px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .content-block h2 {
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      color: #222;
+    }
+
+    .films-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .film-list {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .film-list ol {
+      list-style-type: decimal;
+    }
+
+    .film-list ul {
+      list-style-type: none;
+      margin-left: 20px;
+    }
+
+    .film-list li {
+      margin-bottom: 15px;
+    }
+
+    .film-list strong {
+      font-size: 1.2em;
+    }
+
+    .media-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .image-section, .video-section {
+      margin-bottom: 30px;
+    }
+
+    .movie-poster {
+      max-width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .dashboard-wrapper {
+      margin-top: 20px;
+    }
+
+    .site-footer {
+      background-color: #20232a;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .site-footer a {
+      color: #4faaff;
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links a {
+        margin: 10px 10px 0 0;
+      }
+
+      iframe {
+        width: 100% !important;
+        height: auto;
+      }
+
+      .films-section {
+        flex-direction: column;
+      }
+
+      .film-list, .media-section {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-content">
+      <h1>Top 5 Highest-Grossing Animated Films</h1>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#films">Films</a>
+        <a href="#trailer">Trailer</a>
+        <a href="#dashboard">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="films" class="content-block films-section">
+      <div class="film-list">
+        <h2>Box Office Leaders</h2>
+        <ol>
+          <li>
+            <strong>The Lion King (2019)</strong> – $1.66B
+            <ul>
+              <li>Studio: Disney</li>
+              <li>Director: Jon Favreau</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Frozen II (2019)</strong> – $1.45B
+            <ul>
+              <li>Studio: Disney</li>
+              <li>Directors: Jennifer Lee, Chris Buck</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Incredibles 2 (2018)</strong> – $1.24B
+            <ul>
+              <li>Studio: Pixar</li>
+              <li>Director: Brad Bird</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Minions (2015)</strong> – $1.16B
+            <ul>
+              <li>Studio: Illumination</li>
+              <li>Directors: Kyle Balda, Pierre Coffin</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Toy Story 4 (2019)</strong> – $1.07B
+            <ul>
+              <li>Studio: Pixar</li>
+              <li>Director: Josh Cooley</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="media-section">
+        <section class="image-section">
+          <h2>Wedding photo</h2>
+          <img src="../Images/emmaryderreception-122.jpg" alt="Image not found" class="movie-poster" />
+        </section>
+
+        <section id="trailer" class="video-section">
+          <h2>Polar Express</h2>
+          <div class="video-wrapper">
+            <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/TQhRqtt-Fpo?rel=0&modestbranding=1&showinfo=0"
+        title="Polar Express"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        style="border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+</iframe>
+
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="dashboard" class="content-block">
+      <h2>Interactive Box Office Dashboard</h2>
+      <div class="dashboard-wrapper">
+        <iframe src="https://public.tableau.com/app/profile/pradeepkumar.g/viz/WebTrafficDashboardRedesign/Cockpit"
+                width="100%" height="500" frameborder="0"></iframe>
+      </div>
+    </section>
+
+    <!-- New Game Section -->
+    <section class="content-block" id="new-game">
+      <h2>Come try out our new game.</h2>
+      <div style="margin-top: 20px;">
+        <a href="intro.html" style="
+          display: inline-block;
+          padding: 12px 24px;
+          background-color: #4faaff;
+          color: white;
+          font-weight: bold;
+          text-decoration: none;
+          border-radius: 8px;
+          transition: background-color 0.3s ease;
+        " onmouseover="this.style.backgroundColor='#368bd6'"
+           onmouseout="this.style.backgroundColor='#4faaff'">
+          Play Now
+        </a>
+      </div>
+    </section>
+
+    <!-- Product Link Section -->
+    <section class="content-block" id="product-link">
+      <h2>Check Out Our Featured Arcticle</h2>
+      <p>
+        Explore this insightful article published in the BYU Prelaw Review:
+        <a href="https://scholarsarchive.byu.edu/byuplr/vol39/iss1/8/" target="_blank">
+          BYU Prelaw Review Volume 39, Issue 1, Article 8
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Animated Insights &mdash; <a href="#films">Back to Top</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

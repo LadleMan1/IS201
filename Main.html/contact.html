@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #6940c3;
+      color: white;
+    }
+
+    header, footer {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      border: 1px solid white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-left: 15px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background-color: white;
+      color: rgb(39, 38, 38);
+    }
+
+    .resume-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #b8b8bdd5;
+      padding: 40px;
+      border-radius: 12px;
+    }
+
+    .resume-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .resume-photo {
+      flex-shrink: 0;
+    }
+
+    .resume-photo img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+
+    .resume-info h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .resume-info p {
+      margin: 4px 0;
+      color: #ccc;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section h2 {
+      border-bottom: 1px solid white;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .section li {
+      margin-bottom: 15px;
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span>L - STATUS</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Study Material</a>
+      <a href="contact.html">Creator</a>
+    </nav>
+  </header>
+
+  <div class="resume-container">
+    <div class="resume-header">
+      <div class="resume-photo">
+        <img id="uploadedImage" src="../Images/emmaryderreception-164.jpg" alt="Profile Photo">
+      </div>
+      <div class="resume-info">
+        <h1>Ryder Schone</h1>
+        <p>Email: 11111111@gmail.com</p>
+        <p>Phone: (111) 111 1111</p>
+        <p>Location: Utah</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>Motivated and detail-oriented professional who is passionate about problem solving and continuous learning.</p>
+    </div>
+
+    <div class="section">
+      <h2>Experience</h2>
+      <ul>
+        <li>
+          <strong>Les Schwab Tire Center, Provo — Sales and Service Technician</strong><br>
+          OCT 2022 – Present<br>
+          - Communicates daily with customers, both in-person and over the phone, in a friendly, simplified, and comprehensive manner.<br>
+          - Works with other team members to achieve daily goals in a fast-paced environment while maintaining a positive rapport.<br>
+          - Able to manage multiple responsibilities with concurrent deadlines.<br>
+          - Trains and supports incoming employees monthly on store policies, procedures, and equipment.
+        </li>
+        <li>
+          <strong>Previous Job - Previous Company</strong><br>
+          Jan 2019 – Dec 2020<br>
+          - Contribution or project<br>
+          - Skills used
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Education</h2>
+      <ul>
+        <li>
+          <strong>Brigham Young University, Provo — B.A. Political Science</strong><br>
+          AUG 2026<br>
+          - Microsoft Excel Certification: Completed a 12-week, intensive Microsoft Excel course.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li>Types 50 wpm with 100% accuracy</li>
+        <li>Exceptional customer service skills</li>
+        <li>Proficient in Microsoft Office suite (Word, Excel, Powerpoint)</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 COMPANY NAME. All rights reserved.
+  </footer>
+
+</body>
+</html>
